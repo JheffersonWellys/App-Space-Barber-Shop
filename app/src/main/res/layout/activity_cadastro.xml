@@ -207,8 +207,18 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/T02_AppCmpBtn_Entrar"
         style="@style/button"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="70dp"
         android:text="Cadastrar"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/T02_AppCmpBtn_Voltar"
+        style="@style/button"
+        android:layout_marginBottom="20dp"
+        android:text="Voltar"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
