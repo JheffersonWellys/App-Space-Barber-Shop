@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/MMN00_Itm_PerfilCliente"
+        android:icon="@drawable/icn_perfil"
+        android:title="Perfil Cliente" />
+
+    <item
+        android:id="@+id/MMN00_Itm_PerfilBarbearia"
+        android:icon="@drawable/icn_barbearias"
+        android:title="Perfil Barbearia" />
+
+    <item
+        android:id="@+id/MMN00_Itm_Agendamentos"
+        android:icon="@drawable/icn_agendamentos"
+        android:title="Agendamentos" />
+
+    <item
+        android:id="@+id/MMN00_Itm_Sobre"
+        android:icon="@drawable/icn_sobre"
+        android:title="Sobre" />
+
+    <item
+        android:id="@+id/MMN00_Itm_Logout"
+        android:icon="@drawable/icn_sair"
+        android:title="Sair" />
+
+
+</menu>
