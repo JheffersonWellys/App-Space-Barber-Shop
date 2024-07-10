@@ -3,6 +3,7 @@ package com.h4rzel.spacebarbershop;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class Activity_Cadastro extends AppCompatActivity {
             T02_EdtTx_Cidade, T02_EdtTx_Endereco, T02_EdtTx_Email, T02_EdtTx_Senha;
     private String nome,razaosocial, cnpj, telefone, cidade, email, endereco, senha;
     private Button T02_AppCmpBtn_Entrar;
+    private Button T02_AppCmpBtn_Voltar;
     private Switch T02_Swch_ClienteBarbearia;
 
     private String UserId;
@@ -88,6 +90,13 @@ public class Activity_Cadastro extends AppCompatActivity {
 
 
 
+            }
+        });
+        T02_AppCmpBtn_Voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity_Cadastro.this, Activity_Login.class);
+                startActivity(intent);
             }
         });
 
@@ -153,6 +162,8 @@ public class Activity_Cadastro extends AppCompatActivity {
         T02_EdtTx_Senha = findViewById(R.id.T02_EdtTx_Senha);
         T02_AppCmpBtn_Entrar = findViewById(R.id.T02_AppCmpBtn_Entrar);
         T02_Swch_ClienteBarbearia = findViewById(R.id.T02_Swch_ClienteBarbearia);
+        T02_AppCmpBtn_Voltar = findViewById(R.id.T02_AppCmpBtn_Voltar);
+
 
     }
 

@@ -39,7 +39,7 @@ public class Activity_Login extends AppCompatActivity {
         T01_EdtTx_Senha = findViewById(R.id.T01_EdtTx_Senha);
         T01_AppCmpBtn_Entrar = findViewById(R.id.T01_AppCmpBtn_Entrar);
 
-        T01_AppCmpBtn_Entrar.setOnClickListener(new View.OnClickListener() {
+        T01_AppCmpBtn_Entrar .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Email = T01_EdtTx_Email.getText().toString();
