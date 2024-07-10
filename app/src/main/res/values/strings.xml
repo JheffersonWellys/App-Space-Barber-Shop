@@ -5,4 +5,6 @@
     <string name="T04_Str_Endereço">Endereço da Barbearia</string>
     <string name="T03_str_PromtRedefinirSenha">Não se preocupe insira seu cadastro de <b>E-mail</b> \npara receber link para redefinição de senha.</string>
     <string name="T03_str_RedefinirSenha">REDEFINIR SENHA</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
