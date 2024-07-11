@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ITM_atendimento"
+    android:layout_width="match_parent"
+    android:layout_marginTop="12dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:background="@drawable/bg_agendamento"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:elevation="5dp">
+
+    <LinearLayout
+        android:id="@+id/LYT_nomecliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome Cliente" />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="gerfeson" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:id="@+id/LYT_nomecorte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LYT_nomecliente">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Corte" />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barba" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginStart="10dp"
+        android:id="@+id/LYT_nomebabero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/LYT_nomecorte"
+        app:layout_constraintTop_toTopOf="@+id/LYT_nomecorte">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Barbero" />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Samuel" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:id="@+id/LYT_horario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@+id/LYT_nomecorte"
+        app:layout_constraintTop_toBottomOf="@+id/LYT_nomecorte">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Horario" />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21:30" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginStart="12dp"
+        android:id="@+id/LYT_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/LYT_horario"
+        app:layout_constraintTop_toTopOf="@+id/LYT_horario">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data" />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="09/07/2024" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="29dp"
+        android:layout_height="18dp"
+
+        android:src="@drawable/icn_apagaratendimento"
+        app:layout_constraintBottom_toBottomOf="@+id/LYT_nomecliente"
+        app:layout_constraintEnd_toEndOf="@+id/LYT_nomecliente"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

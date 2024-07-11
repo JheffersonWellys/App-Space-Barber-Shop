@@ -62,27 +62,27 @@
         app:layout_constraintTop_toBottomOf="@id/T03_TxtVw_Email" />
 
     <TextView
-        android:id="@+id/T03_TxtVw_Senha"
+        android:id="@+id/T03_TxtVw_LembrouSuaSenha"
         android:layout_width="155dp"
         android:layout_height="23sp"
         android:layout_marginTop="20dp"
-        android:text=" Esqueceu sua senha?"
+        android:text=" Lembrou sua senha?"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/T03_btn_CliqueAqui"
+        app:layout_constraintEnd_toStartOf="@+id/T03_TxtVw_FazerLogin"
         app:layout_constraintStart_toStartOf="@+id/T03_EdtTxt_Email"
         app:layout_constraintTop_toBottomOf="@id/T03_EdtTxt_Email" />
 
     <TextView
-        android:id="@+id/T03_btn_CliqueAqui"
+        android:id="@+id/T03_TxtVw_FazerLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clique aqui!"
+        android:text="Fazer login!"
         android:textColor="@color/yellow"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/T03_TxtVw_Senha"
-        app:layout_constraintTop_toTopOf="@id/T03_TxtVw_Senha" />
+        app:layout_constraintStart_toEndOf="@id/T03_TxtVw_LembrouSuaSenha"
+        app:layout_constraintTop_toTopOf="@id/T03_TxtVw_LembrouSuaSenha" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/T03_Btn_Enviar"
