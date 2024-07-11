@@ -72,11 +72,13 @@
 
     <EditText
         android:id="@+id/T02_EdtTx_Nome"
+        android:importantForAutofill="no"
         style="@style/container_edittext"
         android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/icn_usuario"
         android:drawablePadding="10dp"
         android:hint="Nome"
+        android:inputType="text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@id/T02_Swch_ClienteBarbearia"
@@ -85,6 +87,7 @@
 
     <EditText
         android:id="@+id/T02_EdtTx_RazaoSocial"
+        android:importantForAutofill="no"
         style="@style/container_edittext"
         android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/icn_razaosocial"
@@ -93,17 +96,20 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:visibility="gone"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="@id/T02_EdtTx_Nome"
         app:layout_constraintStart_toStartOf="@id/T02_EdtTx_Nome"
         app:layout_constraintTop_toBottomOf="@id/T02_EdtTx_Nome" />
 
     <EditText
         android:id="@+id/T02_EdtTx_Telefone"
+        android:importantForAutofill="no"
         style="@style/container_edittext"
         android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/icn_telefone"
         android:drawablePadding="10dp"
         android:hint="Telefone"
+        android:inputType="numberSigned"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@id/T02_EdtTx_RazaoSocial"
@@ -112,11 +118,13 @@
 
     <EditText
         android:id="@+id/T02_EdtTx_Cnpj"
+        android:importantForAutofill="no"
         style="@style/container_edittext"
         android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/icn_cnpj"
         android:drawablePadding="10dp"
         android:hint="CNPJ"
+        android:inputType="numberSigned"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:visibility="gone"
@@ -126,11 +134,13 @@
 
     <EditText
         android:id="@+id/T02_EdtTx_Cidade"
+        android:importantForAutofill="no"
         style="@style/container_edittext"
         android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/icn_cidade"
         android:drawablePadding="10dp"
         android:hint="Cidade"
+        android:inputType="text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="@id/T02_EdtTx_Cnpj"
@@ -139,11 +149,13 @@
 
     <EditText
         android:id="@+id/T02_EdtTx_Endereco"
+        android:importantForAutofill="no"
         style="@style/container_edittext"
         android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/icn_endereco"
         android:drawablePadding="10dp"
         android:hint="Endereço"
+        android:inputType="text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:visibility="gone"
@@ -167,6 +179,7 @@
 
     <EditText
         android:id="@+id/T02_EdtTx_Senha"
+        android:importantForAutofill="no"
         style="@style/container_edittext"
         android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/icn_senha"
@@ -193,32 +206,34 @@
         app:layout_constraintTop_toBottomOf="@id/T02_EdtTx_Senha" />
 
     <TextView
-        android:id="@+id/T02_TxtVw_CliqueAqui"
+        android:id="@+id/T02_TxtVw_FazerLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="Clique aqui!"
+        android:text="Fazer login!"
         android:textColor="@color/yellow"
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/T02_TxtVw_JaPossuiConta"
         app:layout_constraintTop_toTopOf="@+id/T02_TxtVw_JaPossuiConta" />
 
+    <ProgressBar
+        android:id="@+id/T02_PrgBar_Loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="140dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/T02_AppCmpBtn_Entrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/T02_TxtVw_FazerLogin" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/T02_AppCmpBtn_Entrar"
         style="@style/button"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="16dp"
         android:text="Cadastrar"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/T02_AppCmpBtn_Voltar"
-        style="@style/button"
-        android:layout_marginBottom="20dp"
-        android:text="Voltar"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

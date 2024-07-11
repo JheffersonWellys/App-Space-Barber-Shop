@@ -2,14 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/MMN00_Itm_PerfilCliente"
+        android:id="@+id/MMN00_Itm_Perfil"
         android:icon="@drawable/icn_perfil"
-        android:title="Perfil Cliente" />
-
-    <item
-        android:id="@+id/MMN00_Itm_PerfilBarbearia"
-        android:icon="@drawable/icn_barbearias"
-        android:title="Perfil Barbearia" />
+        android:title="Perfil" />
 
     <item
         android:id="@+id/MMN00_Itm_Agendamentos"

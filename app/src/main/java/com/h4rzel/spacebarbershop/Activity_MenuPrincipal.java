@@ -39,18 +39,23 @@ public class Activity_MenuPrincipal extends AppCompatActivity implements Navigat
 
     private Toolbar toolbar;
 
+    private String TipoCadastro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
+        IniciarMenuLateral();
+
+        // Recupera dados do usuário
         RecuperarUsuario();
 
         // Configurar Toolbar personalizada
-        Toolbar toolbar = findViewById(R.id.T04_Tlbr_MenuPrincipal);
+        toolbar = findViewById(R.id.T04_Tlbr_MenuPrincipal);
         setSupportActionBar(toolbar);
 
-        toolbar.setTitle("Menu Principal");
+        toolbar.setTitle("Agendamentos");
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.T04_NavVw_MenuLateral);
@@ -60,13 +65,48 @@ public class Activity_MenuPrincipal extends AppCompatActivity implements Navigat
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        /*
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.T04_FrmLyt_Telas,
-                    new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
-        }*/
+                    new Fragment_Atendimento()).commit();
+            navigationView.setCheckedItem(R.id.MMN00_Itm_Agendamentos);
+        }
 
+    }
+
+    private void RecuperarUsuario() {
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            String userEmail = currentUser.getEmail();
+            textViewEmail.setText(userEmail);
+
+            db.collection("usuarios")
+                    .whereEqualTo("email", userEmail)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                DocumentSnapshot document = querySnapshot.getDocuments().get(0);
+                                if (document.getString("tipo-cadastro") == "cliente"){
+                                    textViewName.setText(document.getString("nome"));
+                                }else{
+                                    textViewName.setText(document.getString("razaosocial"));
+                                }
+
+                            } else {
+                                // Nenhum documento encontrado com o email especificado
+                            }
+                        } else {
+                            // Falha na busca dos documentos
+                        }
+                    });
+        }
     }
 
     @Override
@@ -89,58 +129,27 @@ public class Activity_MenuPrincipal extends AppCompatActivity implements Navigat
 
     }
 
-    private void RecuperarUsuario() {
-
-        // Inicializar Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-
-        // Inicializar Firebase Database
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        // Inicializar Firestore
-        db = FirebaseFirestore.getInstance();
-
-        // Obter o usuário atualmente autenticado
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        String userEmail = currentUser.getEmail();
-        textViewEmail.setText(userEmail);
-
-        if (currentUser != null) {
-            db.collection("usuarios")
-                    .document("cliente")
-                    .collection("clientes")
-                    .whereEqualTo("email", userEmail)
-                    .get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot querySnapshot = task.getResult();
-                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                                DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-                                textViewName.setText(document.getString("nome"));
-                            } else {
-                                // Nenhum documento encontrado com o email especificado
-                            }
-                        } else {
-                            // Falha na busca dos documentos
-                        }
-                    });
-        }
-
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.MMN00_Itm_PerfilCliente:
-                toolbar.setTitle("Perfil");
-                // handle click
-                break;
-            case R.id.MMN00_Itm_PerfilBarbearia:
-                toolbar.setTitle("Perfil");
+            case R.id.MMN00_Itm_Perfil:
+
+                if(TipoCadastro == "cliente"){
+                    toolbar.setTitle("Perfil Cliente");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.T04_FrmLyt_Telas,
+                            new Fragment_PerfilCliente()).commit();
+                }else{
+                    toolbar.setTitle("Perfil Barbearia");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.T04_FrmLyt_Telas,
+                            new Fragment_PerfilBarbearia()).commit();
+                }
+
                 // handle click
                 break;
             case R.id.MMN00_Itm_Agendamentos:
-                toolbar.setTitle("Menu Principal");
+                toolbar.setTitle("Agendamentos");
+                getSupportFragmentManager().beginTransaction().replace(R.id.T04_FrmLyt_Telas,
+                        new Fragment_Atendimento()).commit();
                 // handle click
                 break;
             case R.id.MMN00_Itm_Sobre:
