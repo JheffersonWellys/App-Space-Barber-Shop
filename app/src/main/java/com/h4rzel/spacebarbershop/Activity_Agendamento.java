@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,8 +39,6 @@ public class Activity_Agendamento extends AppCompatActivity {
         ConfigurarCalender();
         ConfigurarRadiuGroups();
         ConfigurarSpinners();
-
-
     }
 
     private void ConfigurarCalender() {
@@ -69,7 +68,7 @@ public class Activity_Agendamento extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<CharSequence> adapterBarbeiro = ArrayAdapter.createFromResource(this,R.array.TiposCortes, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterBarbeiro = ArrayAdapter.createFromResource(this,R.array.Barbeiros, android.R.layout.simple_spinner_item);
         adapterBarbeiro.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         T05_Spne_Barbeiro.setAdapter(adapterBarbeiro);
         T05_Spne_Barbeiro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -120,6 +119,13 @@ public class Activity_Agendamento extends AppCompatActivity {
                         databaseReference.child(id).setValue(agendamento).addOnCompleteListener(task -> {
                             if (task.isSuccessful()){
                                 Toast.makeText(Activity_Agendamento.this,"Agendamento realizado com sucesso!",Toast.LENGTH_SHORT).show();
+                                T05_AppCmpBtn_Agendar.setEnabled(false);
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        finish();
+                                    }
+                                },1500);
                             }else{
                                 Toast.makeText(Activity_Agendamento.this,"Erro ao realizar o agendamento!",Toast.LENGTH_SHORT).show();
                             }
