@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ITM_atendimento"
     android:layout_width="match_parent"
-    android:layout_marginTop="12dp"
+    android:layout_height="wrap_content"
     android:layout_marginStart="12dp"
+    android:layout_marginTop="12dp"
     android:layout_marginEnd="12dp"
     android:background="@drawable/bg_agendamento"
-    android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:elevation="5dp">
+    android:elevation="5dp"
+    android:padding="12dp">
 
     <LinearLayout
-        android:id="@+id/LYT_nomecliente"
+        android:id="@+id/ITM_LinLyt_nomeCliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -21,113 +21,123 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/ITM_TxtVw_nomeCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome Cliente" />
 
         <TextView
-            android:textStyle="bold"
+            android:id="@+id/ITM_TxtVw_Cliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="gerfeson" />
+            android:text="gerfeson"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="5dp"
-        android:id="@+id/LYT_nomecorte"
+        android:id="@+id/ITM_LinLyt_nomeCorte"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LYT_nomecliente">
+        app:layout_constraintTop_toBottomOf="@id/ITM_LinLyt_nomeCliente">
 
         <TextView
+            android:id="@+id/ITM_TxtVw_nomecorte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome do Corte" />
 
         <TextView
-            android:textStyle="bold"
+            android:id="@+id/ITM_TxtVw_corte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Barba" />
+            android:text="Barba"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginStart="10dp"
-        android:id="@+id/LYT_nomebabero"
+        android:id="@+id/ITM_LinLyt_nomeBarbeiro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/LYT_nomecorte"
-        app:layout_constraintTop_toTopOf="@+id/LYT_nomecorte">
+        app:layout_constraintStart_toEndOf="@id/ITM_LinLyt_nomeCorte"
+        app:layout_constraintTop_toTopOf="@id/ITM_LinLyt_nomeCorte">
 
         <TextView
+            android:id="@+id/ITM_TxtVw_nomeBarbeiro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome do Barbero" />
 
         <TextView
-            android:textStyle="bold"
+            android:id="@+id/ITM_TxtVw_barbeiro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Samuel" />
+            android:text="Samuel"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="5dp"
-        android:id="@+id/LYT_horario"
+        android:id="@+id/ITM_LinLyt_Horario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="@+id/LYT_nomecorte"
-        app:layout_constraintTop_toBottomOf="@+id/LYT_nomecorte">
+        app:layout_constraintStart_toStartOf="@id/ITM_LinLyt_nomeCorte"
+        app:layout_constraintTop_toBottomOf="@id/ITM_LinLyt_nomeCorte">
 
         <TextView
+            android:id="@+id/ITM_TxtVw_horarioSelecionado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Horario" />
 
         <TextView
-            android:textStyle="bold"
+            android:id="@+id/ITM_TxtVw_horario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="21:30" />
+            android:text="21:30"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginStart="12dp"
-        android:id="@+id/LYT_data"
+        android:id="@+id/ITM_LinLyt_Data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/LYT_horario"
-        app:layout_constraintTop_toTopOf="@+id/LYT_horario">
+        app:layout_constraintStart_toEndOf="@id/ITM_LinLyt_Horario"
+        app:layout_constraintTop_toTopOf="@id/ITM_LinLyt_Horario">
 
         <TextView
+            android:id="@+id/ITM_TxtVw_dataSelecionada"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data" />
 
         <TextView
-            android:textStyle="bold"
+            android:id="@+id/ITM_TxtVw_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="09/07/2024" />
+            android:text="09/07/2024"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/ITM_ImgVw_DeletarAtendimento"
         android:layout_width="29dp"
         android:layout_height="18dp"
-
         android:src="@drawable/icn_apagaratendimento"
-        app:layout_constraintBottom_toBottomOf="@+id/LYT_nomecliente"
-        app:layout_constraintEnd_toEndOf="@+id/LYT_nomecliente"
+        app:layout_constraintBottom_toBottomOf="@id/ITM_LinLyt_nomeCliente"
+        app:layout_constraintEnd_toEndOf="@id/ITM_LinLyt_nomeCliente"
         app:layout_constraintTop_toTopOf="parent" />
 
 
