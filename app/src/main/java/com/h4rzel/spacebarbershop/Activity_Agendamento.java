@@ -1,0 +1,145 @@
+package com.h4rzel.spacebarbershop;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class Activity_Agendamento extends AppCompatActivity {
+
+    private CalendarView T05_ClnVw_Calendario;
+    private RadioGroup T05_RadGrp_TurnoManha ,T05_RadGrp_TurnoTarde;
+    private Spinner T05_Spne_TipoCorte , T05_Spne_Barbeiro;
+    private AppCompatButton T05_AppCmpBtn_Agendar;
+    private String Data , Hora , TipoDoCorte , Barbeiro;
+    private DatabaseReference databaseReference;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_agendamento);
+        IniciarComponentes();
+        ConfigurarCliques();
+        IniciarFirebase();
+        ConfigurarRadiuGroups();
+        ConfigurarSpinners();
+
+    }
+
+    private void ConfigurarSpinners() {
+        ArrayAdapter<CharSequence> adapterCorte = ArrayAdapter.createFromResource(this,R.array.TiposCortes, android.R.layout.simple_spinner_item);
+        adapterCorte.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        T05_Spne_TipoCorte.setAdapter(adapterCorte);
+        T05_Spne_TipoCorte.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TipoDoCorte = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ArrayAdapter<CharSequence> adapterBarbeiro = ArrayAdapter.createFromResource(this,R.array.TiposCortes, android.R.layout.simple_spinner_item);
+        adapterBarbeiro.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        T05_Spne_Barbeiro.setAdapter(adapterBarbeiro);
+        T05_Spne_Barbeiro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Barbeiro = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void ConfigurarRadiuGroups() {
+        RadioGroup.OnCheckedChangeListener radioGroupsListener = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = findViewById(checkedId);
+                if (radioButton != null){
+                    Hora = radioButton.getText().toString();
+                    if (group == T05_RadGrp_TurnoManha){
+                        T05_RadGrp_TurnoTarde.clearCheck();
+                    }else if (group == T05_RadGrp_TurnoTarde){
+                        T05_RadGrp_TurnoManha.clearCheck();
+                    }
+                }
+            }
+        };
+        T05_RadGrp_TurnoManha.setOnCheckedChangeListener(radioGroupsListener);
+        T05_RadGrp_TurnoTarde.setOnCheckedChangeListener(radioGroupsListener);
+    }
+
+    private void IniciarFirebase() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("agendamentos");
+
+    }
+
+    private void ConfigurarCliques() {
+        T05_AppCmpBtn_Agendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Data != null && Hora != null && TipoDoCorte != null && Barbeiro != null){
+                    String id = databaseReference.push().getKey();
+                    Agendamento agendamento = new Agendamento(Data , Hora , TipoDoCorte , Barbeiro);
+                    if (id != null){
+                        databaseReference.child(id).setValue(agendamento).addOnCompleteListener(task -> {
+                            if (task.isSuccessful()){
+                                Toast.makeText(Activity_Agendamento.this,"Agendamento realizado com sucesso!",Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(Activity_Agendamento.this,"Erro ao realizar o agendamento!",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                }else{
+                    Toast.makeText(Activity_Agendamento.this,"Por favor, preencha todos os campos!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void IniciarComponentes() {
+        T05_AppCmpBtn_Agendar = findViewById(R.id.T05_AppCmpBtn_Agendar);
+        T05_ClnVw_Calendario = findViewById(R.id.T05_ClnVw_Calendario);
+        T05_RadGrp_TurnoManha = findViewById(R.id.T05_RadGrp_TurnoManha);
+        T05_RadGrp_TurnoTarde = findViewById(R.id.T05_RadGrp_TurnoTarde);
+        T05_Spne_Barbeiro = findViewById(R.id.T05_Spne_Barbeiro);
+        T05_Spne_TipoCorte = findViewById(R.id.T05_Spne_TipoCorte);
+    }
+
+    public static class Agendamento{
+        public String data;
+        public String hora;
+        public String tipoCorte;
+        public String barbeiro;
+        public Agendamento(){
+
+        }
+        public Agendamento(String data , String hora , String tipoCorte , String barbeiro){
+            this.data = data;
+            this.hora = hora;
+            this.tipoCorte = tipoCorte;
+            this.barbeiro = barbeiro;
+        }
+    }
+}
