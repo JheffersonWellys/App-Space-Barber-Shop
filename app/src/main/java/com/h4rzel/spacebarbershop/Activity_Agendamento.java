@@ -1,5 +1,6 @@
 package com.h4rzel.spacebarbershop;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -26,6 +27,7 @@ public class Activity_Agendamento extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +35,23 @@ public class Activity_Agendamento extends AppCompatActivity {
         IniciarComponentes();
         ConfigurarCliques();
         IniciarFirebase();
+        ConfigurarCalender();
         ConfigurarRadiuGroups();
         ConfigurarSpinners();
 
+
     }
+
+    private void ConfigurarCalender() {
+        T05_ClnVw_Calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Data = dayOfMonth + "/"+ (month+1)+"/"+ year;
+            }
+        });
+    }
+
+
 
     private void ConfigurarSpinners() {
         ArrayAdapter<CharSequence> adapterCorte = ArrayAdapter.createFromResource(this,R.array.TiposCortes, android.R.layout.simple_spinner_item);
