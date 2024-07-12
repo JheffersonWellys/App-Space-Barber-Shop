@@ -8,4 +8,20 @@
     <string name="navigation_drawer_open">Abrir</string>
     <string name="navigation_drawer_close">Fechar</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="TiposCortes">
+        <item>Barba</item>
+        <item>Bigode</item>
+        <item>Cabelo</item>
+        <item>Sombrancelha</item>
+    </string-array>
+    <string-array name="Barbeiros">
+        <item>Thiago Constantino</item>
+        <item>Jefferson Dias</item>
+        <item>Jhefferson Wellys</item>
+        <item>Deyvid Gonçalves</item>
+        <item>Henrico Dornelas</item>
+        <item>Samuel Araujo</item>
+    </string-array>
+
 </resources>

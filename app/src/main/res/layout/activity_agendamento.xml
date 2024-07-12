@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Agendamento">
+    tools:context=".Activity_Agendamento">
 
     <TextView
-        android:id="@+id/Data"
+        android:id="@+id/T05_TxtVw_Data"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Data"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/calendarView"
+        app:layout_constraintStart_toStartOf="@+id/T05_ClnVw_Calendario"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CalendarView
-        android:id="@+id/calendarView"
+        android:id="@+id/T05_ClnVw_Calendario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Data" />
+        app:layout_constraintTop_toBottomOf="@+id/T05_TxtVw_Data" />
 
     <TextView
         android:id="@+id/Horarios"
@@ -34,40 +34,42 @@
         android:text="Horario"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/calendarView"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        app:layout_constraintStart_toStartOf="@+id/T05_ClnVw_Calendario"
+        app:layout_constraintTop_toBottomOf="@+id/T05_ClnVw_Calendario" />
 
     <RadioGroup
 
-        android:id="@+id/rdg_manha"
+        android:id="@+id/T05_RadGrp_TurnoManha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/calendarView"
-        app:layout_constraintStart_toStartOf="@+id/calendarView"
+        app:layout_constraintEnd_toEndOf="@id/T05_ClnVw_Calendario"
+        app:layout_constraintStart_toStartOf="@+id/T05_ClnVw_Calendario"
         app:layout_constraintTop_toBottomOf="@+id/Horarios">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/T05_RadBtn_8H"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="true"
             android:text="8H" />
 
         <RadioButton
+            android:id="@+id/T05_RadBtn_9H"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="9H" />
 
         <RadioButton
+            android:id="@+id/T05_RadBtn_10H"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="10H" />
 
         <RadioButton
+            android:id="@+id/T05_RadBtn_11H"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -77,33 +79,37 @@
 
     <RadioGroup
 
-        android:id="@+id/rdg_tarde"
+        android:id="@+id/T05_RadGrp_TurnoTarde"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/rdg_manha"
-        app:layout_constraintStart_toStartOf="@+id/rdg_manha"
-        app:layout_constraintTop_toBottomOf="@id/rdg_manha">
+        app:layout_constraintEnd_toEndOf="@id/T05_RadGrp_TurnoManha"
+        app:layout_constraintStart_toStartOf="@+id/T05_RadGrp_TurnoManha"
+        app:layout_constraintTop_toBottomOf="@id/T05_RadGrp_TurnoManha">
 
         <RadioButton
+            android:id="@+id/T05_RadBtn_13H"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="13H" />
 
         <RadioButton
+            android:id="@+id/T05_RadBtn_14H"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="14H" />
 
         <RadioButton
+            android:id="@+id/T05_RadBtn_15H"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="15H" />
 
         <RadioButton
+            android:id="@+id/T05_RadBtn_16H"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -112,58 +118,57 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/T05_TxtVw_Cortes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Corte"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/rdg_tarde"
-        app:layout_constraintTop_toBottomOf="@+id/rdg_tarde" />
+        app:layout_constraintStart_toStartOf="@+id/T05_RadGrp_TurnoTarde"
+        app:layout_constraintTop_toBottomOf="@+id/T05_RadGrp_TurnoTarde" />
 
     <Spinner
-        android:id="@+id/corte"
+        android:id="@+id/T05_Spne_TipoCorte"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/rdg_tarde"
-        app:layout_constraintStart_toStartOf="@+id/rdg_tarde"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="@+id/T05_RadGrp_TurnoTarde"
+        app:layout_constraintStart_toStartOf="@+id/T05_RadGrp_TurnoTarde"
+        app:layout_constraintTop_toBottomOf="@+id/T05_TxtVw_Cortes" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/T05_TxtVw_Barbeiro"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Barbeiro"
         android:layout_marginTop="10dp"
+        android:text="Barbeiro"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/rdg_tarde"
-        app:layout_constraintTop_toBottomOf="@+id/corte" />
+        app:layout_constraintStart_toStartOf="@+id/T05_RadGrp_TurnoTarde"
+        app:layout_constraintTop_toBottomOf="@+id/T05_Spne_TipoCorte" />
 
     <Spinner
-        android:id="@+id/barbeiro"
+        android:id="@+id/T05_Spne_Barbeiro"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/rdg_tarde"
-        app:layout_constraintStart_toStartOf="@+id/rdg_tarde"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintEnd_toEndOf="@+id/T05_RadGrp_TurnoTarde"
+        app:layout_constraintStart_toStartOf="@+id/T05_RadGrp_TurnoTarde"
+        app:layout_constraintTop_toBottomOf="@+id/T05_TxtVw_Barbeiro" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/T05_AppCmpBtn_Agendar"
         style="@style/button"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="16dp"
         android:layout_marginTop="10dp"
+        android:text="Agendar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Agendar"
-
         />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

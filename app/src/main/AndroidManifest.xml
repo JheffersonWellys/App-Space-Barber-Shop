@@ -25,6 +25,11 @@
             android:exported="false" />
 
         <activity
+            android:name=".Activity_Agendamento"
+            android:exported="false" />
+
+
+        <activity
             android:name=".Activity_RecuperarSenha"
             android:exported="false" />
 
