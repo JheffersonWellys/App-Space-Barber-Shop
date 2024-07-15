@@ -5,13 +5,13 @@
     <string name="T04_Str_Endereço">Endereço da Barbearia</string>
     <string name="T03_str_PromtRedefinirSenha">Não se preocupe insira seu cadastro de <b>E-mail</b> \npara receber link para redefinição de senha.</string>
     <string name="T03_str_RedefinirSenha">REDEFINIR SENHA</string>
-<<<<<<< HEAD
+
     <string name="Frg_Str_Sobre">Sobre</string>
     <string name="FRg_Str_PromptSobre">Seja bem-vindo a nosso aplicativo \nSpace Barber Shop!\n
         \nEle foi desenvolvido visando diminuir as filas nas barbearias, possibilitando que o cliente realize agendamentos a qualquer momento.\n
         \nO aplicativo foi implementado dividindo a criação das funcionalidades por cada pessoa responsável, sendo eles: \nDeyvid Ferreira,
         \nHenrico Dornelas, \nJefferson Santos, \nJhefferson 'H4rzel', \nSamuel Araújo e \nThiago Silva.</string>
-=======
+
     <string name="navigation_drawer_open">Abrir</string>
     <string name="navigation_drawer_close">Fechar</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -31,5 +31,4 @@
         <item>Samuel Araujo</item>
     </string-array>
 
->>>>>>> 86795fa6ab008d18d83ac5079fe543db08bd542c
 </resources>
