@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_PerfilBarbearia">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="80dp"
+            android:layout_marginTop="40dp"
+            android:layout_height="80dp"
+            android:src="@drawable/icn_usuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/T02_EdtTx_RazaoSocial"
+            style="@style/container_edittext"
+            android:layout_marginTop="40dp"
+            android:drawableLeft="@drawable/icn_razaosocial"
+            android:drawablePadding="10dp"
+            android:hint="Razão Social"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/myImageView"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <EditText
+            android:id="@+id/T02_EdtTx_Cnpj"
+            style="@style/container_edittext"
+            android:drawableLeft="@drawable/icn_cnpj"
+            android:drawablePadding="10dp"
+            android:hint="CNPJ"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/T02_EdtTx_RazaoSocial"
+            />
+
+        <EditText
+            android:id="@+id/T02_EdtTx_Endereco"
+            style="@style/container_edittext"
+            android:drawableLeft="@drawable/icn_endereco"
+            android:drawablePadding="10dp"
+            android:hint="Endereço"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/T02_EdtTx_Cnpj"
+           />
+
+
+        <EditText
+            android:id="@+id/T02_EdtTx_Senha"
+            style="@style/container_edittext"
+            android:drawableLeft="@drawable/icn_senha"
+            android:drawablePadding="10dp"
+            android:hint="Senha"
+            android:inputType="numberPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/T02_EdtTx_Endereco"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/T02_AppCmpBtn_Entrar"
+            style="@style/button"
+            android:layout_marginBottom="16dp"
+            android:text="Atualizar"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
