@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class AgendamentoAdapter extends RecyclerView.Adapter<AgendamentoViewHolder>{
-    private List<Agendamento>agendamentos;
+    private List<Agendamento> agendamentos ;
 
     public AgendamentoAdapter(List<Agendamento> agendamentos) {
+        this.agendamentos = agendamentos;
     }
 
     @NonNull
@@ -27,14 +28,26 @@ public class AgendamentoAdapter extends RecyclerView.Adapter<AgendamentoViewHold
     public void onBindViewHolder(@NonNull AgendamentoViewHolder holder, int position) {
 
         Agendamento agendamento = agendamentos.get(position);
+
         holder.ITM_TxtVw_barbeiro.setText(agendamento.getBarbeiro());
+        holder.ITM_TxtVw_Cliente.setText(agendamento.getCliente());
         holder.ITM_TxtVw_corte.setText(agendamento.getTipoCorte());
         holder.ITM_TxtVw_data.setText(agendamento.getData());
         holder.ITM_TxtVw_horario.setText(agendamento.getHora());
+        holder.ITM_ImgVw_DeletarAtendimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Função de apagar agendamento
+
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return agendamentos.size();
     }
+
 }

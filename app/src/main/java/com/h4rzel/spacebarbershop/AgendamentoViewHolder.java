@@ -1,6 +1,7 @@
 package com.h4rzel.spacebarbershop;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AgendamentoViewHolder extends RecyclerView.ViewHolder {
     TextView ITM_TxtVw_Cliente, ITM_TxtVw_corte,ITM_TxtVw_barbeiro, ITM_TxtVw_horario,ITM_TxtVw_data;
+    ImageView ITM_ImgVw_DeletarAtendimento;
 
     public AgendamentoViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -16,5 +18,6 @@ public class AgendamentoViewHolder extends RecyclerView.ViewHolder {
         ITM_TxtVw_barbeiro = itemView.findViewById(R.id.ITM_TxtVw_barbeiro);
         ITM_TxtVw_horario = itemView.findViewById(R.id.ITM_TxtVw_horario);
         ITM_TxtVw_data = itemView.findViewById(R.id.ITM_TxtVw_data);
+        ITM_ImgVw_DeletarAtendimento = itemView.findViewById(R.id.ITM_ImgVw_DeletarAtendimento);
     }
 }

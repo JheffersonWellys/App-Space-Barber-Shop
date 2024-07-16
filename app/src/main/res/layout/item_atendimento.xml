@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -134,11 +135,12 @@
     <ImageView
         android:id="@+id/ITM_ImgVw_DeletarAtendimento"
         android:layout_width="29dp"
-        android:layout_height="18dp"
+        android:layout_height="25dp"
         android:src="@drawable/icn_apagaratendimento"
         app:layout_constraintBottom_toBottomOf="@id/ITM_LinLyt_nomeCliente"
         app:layout_constraintEnd_toEndOf="@id/ITM_LinLyt_nomeCliente"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/yellow" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

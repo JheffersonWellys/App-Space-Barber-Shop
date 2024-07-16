@@ -14,10 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class Activity_Login extends AppCompatActivity {
@@ -143,6 +148,7 @@ public class Activity_Login extends AppCompatActivity {
     }
 
     private void validateUserType(String email, boolean isBarbearia) {
+
         db.collection("usuarios")
                 .whereEqualTo("email", email)
                 .get()
@@ -156,13 +162,20 @@ public class Activity_Login extends AppCompatActivity {
 
                             // Recupera o tipo de cadastro do cliente
                             String tipoCadastro = document.getString("tipo-cadastro");
+                            String nome;
+                            if (tipoCadastro.equals("cliente")){
+                                nome = document.getString("nome");
+                            }else{
+                                nome = document.getString("razaosocial");
+                            }
 
                             // Compara o tipo de cadastro cadastrado com o ativado no login
                             if ((isBarbearia && "barbearia".equals(tipoCadastro)) ||
                                     (!isBarbearia && "cliente".equals(tipoCadastro))) {
-
-                                // Caso esteja correto, realiza o login redirecionando para o menu principal
                                 Intent intent = new Intent(Activity_Login.this, Activity_MenuPrincipal.class);
+                                intent.putExtra("NomeUsuario", nome);
+                                intent.putExtra("Email", email);
+                                intent.putExtra("TipoCadastro", tipoCadastro);
                                 startActivity(intent);
                                 finish();
                             } else {
@@ -184,3 +197,4 @@ public class Activity_Login extends AppCompatActivity {
     }
 
 }
+

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,69 +24,75 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fragment_Atendimento extends Fragment {
-    FloatingActionButton FRAG00_FltBtn_Agendar;
-    RecyclerView recyclerView;
+    private FloatingActionButton FRAG00_FltBtn_Agendar;
+    private RecyclerView recyclerView;
     private AgendamentoAdapter adapter;
     private List<Agendamento> agendamentos;
+    private DatabaseReference ref;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_atendimento, container, false);
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         IniciarComponentes(view);
-        ConfigurarClicks(view);
+        ConfigurarClicks();
         ConfigurarRecyclerView(view);
         ConfigurarFireBase();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        CarregarDados();
+    }
+
+    private void CarregarDados() {
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                agendamentos.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Agendamento agendamento = dataSnapshot.getValue(Agendamento.class);
+                    if (agendamento != null) {
+                        agendamentos.add(agendamento);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle possible errors
+            }
+        });
+    }
+
     private void ConfigurarRecyclerView(View view) {
+        agendamentos = new ArrayList<>();
         recyclerView = view.findViewById(R.id.FRAG00_RcyVw_Atendimentos);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        agendamentos = new ArrayList<>();
         adapter = new AgendamentoAdapter(agendamentos);
         recyclerView.setAdapter(adapter);
     }
 
     private void ConfigurarFireBase() {
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("agendamentos");
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                agendamentos.clear();
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    Agendamento agendamento = dataSnapshot.getValue(Agendamento.class);
-                    agendamentos.add(agendamento);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        ref = database.getReference("agendamentos");
     }
 
-    private void ConfigurarClicks(View view) {
-        FRAG00_FltBtn_Agendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Activity_Agendamento.class);
-                startActivity(intent);
-            }
+    private void ConfigurarClicks() {
+        FRAG00_FltBtn_Agendar.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Activity_Agendamento.class);
+            startActivity(intent);
         });
     }
 
     private void IniciarComponentes(View view) {
         FRAG00_FltBtn_Agendar = view.findViewById(R.id.FRAG00_FltBtn_Agendar);
     }
-
 }

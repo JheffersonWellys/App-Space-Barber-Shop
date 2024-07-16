@@ -1,5 +1,6 @@
 package com.h4rzel.spacebarbershop;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,28 +31,24 @@ import android.widget.Toast;
 public class Activity_MenuPrincipal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
-    private DatabaseReference mDatabase;
+
     private TextView textViewName, textViewEmail;
 
     private NavigationView navigationView;
 
     private Toolbar toolbar;
 
-    private String TipoCadastro;
+    private String TipoCadastro, NomeUsuario, Email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
+        RecuperarDadosUsuario();
+
         IniciarMenuLateral();
 
-        // Recupera dados do usuário
-        RecuperarUsuario();
-
-        // Configurar Toolbar personalizada
         toolbar = findViewById(R.id.T04_Tlbr_MenuPrincipal);
         setSupportActionBar(toolbar);
 
@@ -73,40 +70,16 @@ public class Activity_MenuPrincipal extends AppCompatActivity implements Navigat
 
     }
 
-    private void RecuperarUsuario() {
+    private void RecuperarDadosUsuario() {
 
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Intent intent = getIntent();
 
-        db = FirebaseFirestore.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if (currentUser != null) {
-            String userEmail = currentUser.getEmail();
-            textViewEmail.setText(userEmail);
-
-            db.collection("usuarios")
-                    .whereEqualTo("email", userEmail)
-                    .get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot querySnapshot = task.getResult();
-                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                                DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-                                if (document.getString("tipo-cadastro") == "cliente"){
-                                    textViewName.setText(document.getString("nome"));
-                                }else{
-                                    textViewName.setText(document.getString("razaosocial"));
-                                }
-
-                            } else {
-                                // Nenhum documento encontrado com o email especificado
-                            }
-                        } else {
-                            // Falha na busca dos documentos
-                        }
-                    });
+        if (intent.hasExtra("NomeUsuario")) {
+            NomeUsuario = intent.getStringExtra("NomeUsuario");
+            Email = intent.getStringExtra("Email");
+            TipoCadastro = intent.getStringExtra("TipoCadastro");
         }
+
     }
 
     @Override
@@ -127,14 +100,16 @@ public class Activity_MenuPrincipal extends AppCompatActivity implements Navigat
         textViewName = headerView.findViewById(R.id.MMN00_TxtVw_NomeUsuario);
         textViewEmail = headerView.findViewById(R.id.MMN00_TxtVw_EmailUsuario);
 
+        textViewName.setText(NomeUsuario);
+        textViewEmail.setText(Email);
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.MMN00_Itm_Perfil:
-
-                if(TipoCadastro == "cliente"){
+                if(TipoCadastro.equals("cliente")){
                     toolbar.setTitle("Perfil Cliente");
                     getSupportFragmentManager().beginTransaction().replace(R.id.T04_FrmLyt_Telas,
                             new Fragment_PerfilCliente()).commit();
@@ -143,22 +118,21 @@ public class Activity_MenuPrincipal extends AppCompatActivity implements Navigat
                     getSupportFragmentManager().beginTransaction().replace(R.id.T04_FrmLyt_Telas,
                             new Fragment_PerfilBarbearia()).commit();
                 }
-
-                // handle click
                 break;
+
             case R.id.MMN00_Itm_Agendamentos:
                 toolbar.setTitle("Agendamentos");
                 getSupportFragmentManager().beginTransaction().replace(R.id.T04_FrmLyt_Telas,
                         new Fragment_Atendimento()).commit();
-                // handle click
                 break;
+
             case R.id.MMN00_Itm_Sobre:
                 toolbar.setTitle("Sobre");
-                // handle click
                 break;
+
             case R.id.MMN00_Itm_Logout:
-                // handle click
                 break;
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

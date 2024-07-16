@@ -11,16 +11,12 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
-        <TextView
-            android:id="@+id/T02_EdtTx_NovoCadastro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/myImageView"
+            android:layout_width="80dp"
             android:layout_marginTop="40dp"
-            android:hint="CLIENTE"
-            android:textAlignment="center"
-            android:textColorHint="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:layout_height="80dp"
+            android:src="@drawable/icn_usuario"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,15 +24,15 @@
         <EditText
             android:id="@+id/T02_EdtTx_Nome"
             style="@style/container_edittext"
-            android:layout_marginTop="20dp"
             android:drawableLeft="@drawable/icn_usuario"
             android:drawablePadding="10dp"
             android:hint="Nome"
+            android:layout_marginTop="40dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            app:layout_constraintEnd_toEndOf="@id/T02_EdtTx_NovoCadastro"
-            app:layout_constraintStart_toStartOf="@id/T02_EdtTx_NovoCadastro"
-            app:layout_constraintTop_toBottomOf="@id/T02_EdtTx_NovoCadastro" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myImageView" />
 
         <EditText
             android:id="@+id/T02_EdtTx_Telefone"
@@ -63,34 +59,6 @@
             app:layout_constraintEnd_toEndOf="@id/T02_EdtTx_Telefone"
             app:layout_constraintStart_toStartOf="@id/T02_EdtTx_Telefone"
             app:layout_constraintTop_toBottomOf="@id/T02_EdtTx_Telefone" />
-
-        <EditText
-            android:id="@+id/T02_EdtTx_Email"
-            style="@style/container_edittext"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/icn_email"
-            android:drawablePadding="10dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintEnd_toEndOf="@id/T02_EdtTx_Cidade"
-            app:layout_constraintStart_toStartOf="@id/T02_EdtTx_Cidade"
-            app:layout_constraintTop_toBottomOf="@id/T02_EdtTx_Cidade" />
-
-        <EditText
-            android:id="@+id/T02_EdtTx_Senha"
-            style="@style/container_edittext"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/icn_senha"
-            android:drawablePadding="10dp"
-            android:hint="Senha"
-            android:inputType="numberPassword"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintEnd_toEndOf="@id/T02_EdtTx_Email"
-            app:layout_constraintStart_toStartOf="@id/T02_EdtTx_Email"
-            app:layout_constraintTop_toBottomOf="@id/T02_EdtTx_Email" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/T02_AppCmpBtn_Entrar"

@@ -31,8 +31,9 @@
             android:hint="Razão Social"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/myImageView"
-            tools:layout_editor_absoluteX="20dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myImageView" />
 
         <EditText
             android:id="@+id/T02_EdtTx_Cnpj"
@@ -42,8 +43,9 @@
             android:hint="CNPJ"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/T02_EdtTx_RazaoSocial"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/T02_EdtTx_RazaoSocial"
+            app:layout_constraintStart_toStartOf="@+id/T02_EdtTx_RazaoSocial"
+            app:layout_constraintTop_toBottomOf="@+id/T02_EdtTx_RazaoSocial" />
 
         <EditText
             android:id="@+id/T02_EdtTx_Endereco"
@@ -53,21 +55,10 @@
             android:hint="Endereço"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/T02_EdtTx_Cnpj"
-           />
+            app:layout_constraintEnd_toEndOf="@+id/T02_EdtTx_Cnpj"
+            app:layout_constraintStart_toStartOf="@+id/T02_EdtTx_Cnpj"
+            app:layout_constraintTop_toBottomOf="@+id/T02_EdtTx_Cnpj" />
 
-
-        <EditText
-            android:id="@+id/T02_EdtTx_Senha"
-            style="@style/container_edittext"
-            android:drawableLeft="@drawable/icn_senha"
-            android:drawablePadding="10dp"
-            android:hint="Senha"
-            android:inputType="numberPassword"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/T02_EdtTx_Endereco"
-            tools:layout_editor_absoluteX="20dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/T02_AppCmpBtn_Entrar"

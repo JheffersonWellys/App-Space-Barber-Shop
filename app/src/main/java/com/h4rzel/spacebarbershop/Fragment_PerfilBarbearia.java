@@ -2,63 +2,126 @@ package com.h4rzel.spacebarbershop;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Fragment_PerfilBarbearia#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.h4rzel.spacebarbershop.databinding.FragmentPerfilBarbeariaBinding;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Fragment_PerfilBarbearia extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Fragment_PerfilBarbearia() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_PerfilBarbearia.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Fragment_PerfilBarbearia newInstance(String param1, String param2) {
-        Fragment_PerfilBarbearia fragment = new Fragment_PerfilBarbearia();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    FragmentPerfilBarbeariaBinding binding;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private String endereco, cnpj, razaosocial,email, documentId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__perfil_barbearia, container, false);
+        binding = FragmentPerfilBarbeariaBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        FirebaseApp.initializeApp(getContext());
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            email = currentUser.getEmail();
+        }
+
+        RecuperarDados(view); // Passa a View para RecuperarDados
+
+        binding.T02AppCmpBtnEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateUserProfile();
+            }
+        });
+
+        return view;
+
     }
+
+    private void SetarDadosTextView(View view) {
+        binding.T02EdtTxRazaoSocial.setText(razaosocial);
+        binding.T02EdtTxCnpj.setText(cnpj);
+        binding.T02EdtTxEndereco.setText(endereco);
+    }
+
+    private void updateUserProfile() {
+        String razaosocial = binding.T02EdtTxRazaoSocial.getText().toString().trim();
+        String endereco = binding.T02EdtTxEndereco.getText().toString().trim();
+        String cnpj = binding.T02EdtTxCnpj.getText().toString().trim();
+
+
+        if (TextUtils.isEmpty(razaosocial) || TextUtils.isEmpty(endereco) || TextUtils.isEmpty(cnpj)) {
+            Toast.makeText(getActivity(), "Preencha todo os campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            DocumentReference userRef = db.collection("usuarios").document(documentId);
+
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("razaosocial", razaosocial);
+            updates.put("endereco", endereco);
+            updates.put("cnpj", cnpj);
+
+            userRef.update(updates)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getActivity(), "Dados atualizados com sucesso!", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), "Erro ao atualizar dados", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    private void RecuperarDados(View view) {
+        db.collection("usuarios")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            razaosocial = document.getString("razaosocial");
+                            cnpj = document.getString("cnpj");
+                            endereco = document.getString("endereco");
+                            documentId = document.getId();
+                        }
+                        // Chama SetarDadosTextView após os dados serem recuperados
+                        SetarDadosTextView(view);
+                    } else {
+                        Toast.makeText(getContext(), "Falha ao recuperar dados", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }
