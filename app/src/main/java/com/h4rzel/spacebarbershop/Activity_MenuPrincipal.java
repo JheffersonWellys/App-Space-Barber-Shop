@@ -75,9 +75,11 @@ public class Activity_MenuPrincipal extends AppCompatActivity implements Navigat
         Intent intent = getIntent();
 
         if (intent.hasExtra("NomeUsuario")) {
+
             NomeUsuario = intent.getStringExtra("NomeUsuario");
             Email = intent.getStringExtra("Email");
             TipoCadastro = intent.getStringExtra("TipoCadastro");
+
         }
 
     }
@@ -108,6 +110,7 @@ public class Activity_MenuPrincipal extends AppCompatActivity implements Navigat
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+
             case R.id.MMN00_Itm_Perfil:
                 if(TipoCadastro.equals("cliente")){
                     toolbar.setTitle("Perfil Cliente");
@@ -128,9 +131,15 @@ public class Activity_MenuPrincipal extends AppCompatActivity implements Navigat
 
             case R.id.MMN00_Itm_Sobre:
                 toolbar.setTitle("Sobre");
+                getSupportFragmentManager().beginTransaction().replace(R.id.T04_FrmLyt_Telas,
+                        new Fragment_Sobre()).commit();
                 break;
 
             case R.id.MMN00_Itm_Logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(Activity_MenuPrincipal.this, Activity_Login.class);
+                startActivity(intent);
+                finish();
                 break;
 
         }

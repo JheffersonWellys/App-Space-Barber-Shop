@@ -14,11 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +34,15 @@ public class Fragment_Atendimento extends Fragment {
     private AgendamentoAdapter adapter;
     private List<Agendamento> agendamentos;
     private DatabaseReference ref;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private DatabaseReference mDatabase;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+    String Email, TipoCadastro;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_atendimento, container, false);
     }
 
@@ -44,12 +53,13 @@ public class Fragment_Atendimento extends Fragment {
         ConfigurarClicks();
         ConfigurarRecyclerView(view);
         ConfigurarFireBase();
+        RecuperarUsuario();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        CarregarDados();
+        RecuperarUsuario();
     }
 
     private void CarregarDados() {
@@ -58,9 +68,19 @@ public class Fragment_Atendimento extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 agendamentos.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String agendamentoId = dataSnapshot.getKey();
                     Agendamento agendamento = dataSnapshot.getValue(Agendamento.class);
-                    if (agendamento != null) {
-                        agendamentos.add(agendamento);
+
+                    if (TipoCadastro != null && TipoCadastro.equals("cliente")) {
+                        if (agendamento.getEmail().equals(Email)) {
+                            agendamento.setId(agendamentoId);
+                            agendamentos.add(agendamento);
+                        }
+                    } else {
+                        if (agendamento != null) {
+                            agendamento.setId(agendamentoId);
+                            agendamentos.add(agendamento);
+                        }
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -94,5 +114,36 @@ public class Fragment_Atendimento extends Fragment {
 
     private void IniciarComponentes(View view) {
         FRAG00_FltBtn_Agendar = view.findViewById(R.id.FRAG00_FltBtn_Agendar);
+    }
+
+    private void RecuperarUsuario() {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            String userEmail = currentUser.getEmail();
+            Email = currentUser.getEmail();
+
+            db.collection("usuarios")
+                    .whereEqualTo("email", userEmail)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                DocumentSnapshot document = querySnapshot.getDocuments().get(0);
+                                TipoCadastro = document.getString("tipo-cadastro");
+                                // Agora que TipoCadastro foi recuperado, carregar os dados
+                                CarregarDados();
+                            } else {
+                                // Nenhum documento encontrado com o email especificado
+                            }
+                        } else {
+                            // Falha na busca dos documentos
+                        }
+                    });
+        }
     }
 }

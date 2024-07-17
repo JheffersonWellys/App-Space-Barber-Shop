@@ -29,7 +29,7 @@ public class Activity_Agendamento extends AppCompatActivity {
     private RadioGroup T05_RadGrp_TurnoManha ,T05_RadGrp_TurnoTarde;
     private Spinner T05_Spne_TipoCorte , T05_Spne_Barbeiro;
     private AppCompatButton T05_AppCmpBtn_Agendar;
-    private String Data , Hora , TipoDoCorte , Barbeiro, Cliente;
+    private String Data , Hora , TipoDoCorte , Barbeiro, Cliente, Email;
     private DatabaseReference databaseReference;
 
     private FirebaseAuth mAuth;
@@ -62,6 +62,7 @@ public class Activity_Agendamento extends AppCompatActivity {
 
         if (currentUser != null) {
             String userEmail = currentUser.getEmail();
+            Email = currentUser.getEmail();
 
             db.collection("usuarios")
                     .whereEqualTo("email", userEmail)
@@ -154,7 +155,7 @@ public class Activity_Agendamento extends AppCompatActivity {
             public void onClick(View v) {
                 if (Data != null && Hora != null && TipoDoCorte != null && Barbeiro != null){
                     String id = databaseReference.push().getKey();
-                    Agendamento agendamento = new Agendamento(Data , Hora , TipoDoCorte , Barbeiro, Cliente);
+                    Agendamento agendamento = new Agendamento(Data , Hora , TipoDoCorte , Barbeiro, Cliente, Email);
                     if (id != null){
                         databaseReference.child(id).setValue(agendamento).addOnCompleteListener(task -> {
                             if (task.isSuccessful()){
@@ -194,15 +195,17 @@ public class Activity_Agendamento extends AppCompatActivity {
         public String tipoCorte;
         public String barbeiro;
         public String cliente;
+        public String email;
         public Agendamento(){
 
         }
-        public Agendamento(String data , String hora , String tipoCorte , String barbeiro, String Cliente){
+        public Agendamento(String data , String hora , String tipoCorte , String barbeiro, String Cliente, String Email){
             this.data = data;
             this.hora = hora;
             this.tipoCorte = tipoCorte;
             this.barbeiro = barbeiro;
             this.cliente = Cliente;
+            this.email = Email;
         }
     }
 }

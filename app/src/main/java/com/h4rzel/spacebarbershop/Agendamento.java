@@ -1,18 +1,37 @@
 package com.h4rzel.spacebarbershop;
 
 public class Agendamento {
-    private String barbeiro, tipoCorte, data, hora, cliente;
+    private String barbeiro, tipoCorte, data, hora, cliente, id, email;
 
     public Agendamento() {
 
     }
 
-    public Agendamento(String barbeiro, String data, String hora, String tipoCorte, String Cliente, String id) {
+    public Agendamento(String barbeiro, String data, String hora, String tipoCorte, String Cliente, String Id, String Email) {
         this.barbeiro = barbeiro;
         this.data = data;
         this.hora = hora;
         this.tipoCorte = tipoCorte;
         this.cliente = Cliente;
+        this.id = Id;
+        this.email = Email;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getCliente() {
