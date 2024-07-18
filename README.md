@@ -17,7 +17,7 @@ O principal objetivo do aplicativo é facilitar a reserva de horários específi
 - Escolha de corte e barbeiro.
 
 ## 💡 Motivação
-A motivação para a criação deste aplicativo foi um desafio proposto pela professora Laura para o Projeto Integrador de finalização do curso de desenvolvimento de aplicação mobile no Senac.
+A motivação para a criação deste aplicativo foi um desafio proposto pela professora Laura Ribeiro [GitHub](https://github.com/LauraCristinaRibeiro)  para o Projeto Integrador de finalização do curso de desenvolvimento de aplicação mobile no Senac.
 
 ## 🛠️ Tecnologias Utilizadas
 - *Firebase*: Controle de acesso e banco de dados.
